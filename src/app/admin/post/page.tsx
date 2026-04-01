@@ -1,6 +1,5 @@
-import PostListAdmin from "@/components/PostListAdmin";
+import PostListAdmin from "@/components/Admin/PostListAdmin";
 import SpinLoader from "@/components/SpinLoader";
-import { findAllPostsAdmin } from "@/lib/post/queries/admin";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
