@@ -1,14 +1,17 @@
 "use client";
 
-import { Form, ImageUpIcon } from "lucide-react";
+import { ImageUpIcon } from "lucide-react";
 import { Button } from "../Button";
 import { useRef, useState, useTransition } from "react";
 import { IMAGE_UPLOAD_MAX_SIZE } from "@/lib/constants";
 import { toast } from "react-toastify";
 import { uploadImageAction } from "@/actions/upload/upload-image-action";
-import { asyncDelay } from "@/utils/async-delay";
 
-export default function ImageUploader() {
+type ImageUploaderProps = {
+  disabled?: boolean;
+};
+
+export default function ImageUploader({ disabled }: ImageUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, startTransition] = useTransition();
   const [imageUrl, setImageUrl] = useState("");
@@ -65,7 +68,7 @@ export default function ImageUploader() {
         type="button"
         className="self-start"
         onClick={handleChooseFile}
-        disabled={isUploading}
+        disabled={isUploading || disabled}
       >
         <ImageUpIcon />
         Enviar uma imagem
@@ -88,7 +91,7 @@ export default function ImageUploader() {
         accept="image/*"
         className="hidden"
         onChange={handleChange}
-        disabled={isUploading}
+        disabled={isUploading || disabled}
       />
     </div>
   );

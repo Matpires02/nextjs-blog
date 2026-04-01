@@ -15,7 +15,7 @@ export const findPublicPostBySlugCached = cache((slug: string) => {
         .findBySlugPublic(slug)
         .catch(() => undefined);
 
-      if (!post) notFound();
+      if (!post?.published || !post) return undefined;
 
       return post;
     },

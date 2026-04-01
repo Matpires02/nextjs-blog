@@ -45,5 +45,6 @@ export const PostCreateSchema = PostBaseSchema;
 
 // PostUpdateSchema: pode incluir campos extras no futuro (ex: id)
 export const PostUpdateSchema = PostBaseSchema.extend({
-  // id: z.string().uuid('ID inválido'),
+  id: z.string().uuid("ID inválido"),
+  slug: z.string(),
 });

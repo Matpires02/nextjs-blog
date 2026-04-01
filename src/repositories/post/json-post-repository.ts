@@ -15,6 +15,18 @@ const JSON_POSTS_FILE_PATH = resolve(
 );
 
 export class JsonPostRepository implements PostRepository {
+  create(post: PostModel): Promise<PostModel> {
+    throw new Error("Method not implemented.");
+  }
+  update(
+    id: string,
+    newPostData: Omit<PostModel, "id" | "slug" | "createdAt" | "updatedAt">,
+  ): Promise<PostModel> {
+    throw new Error("Method not implemented.");
+  }
+  delete(id: string): Promise<PostModel> {
+    throw new Error("Method not implemented.");
+  }
   private async readFromDisk(): Promise<PostModel[]> {
     const jsonContent = await readFile(JSON_POSTS_FILE_PATH, "utf-8");
 

@@ -3,12 +3,15 @@ import Image from "next/image";
 import { PostHeading } from "../PostHeading";
 import { PostDate } from "../PostDate";
 import { SafeMarkdown } from "../SafeMarkdown";
+import { notFound } from "next/navigation";
 
 type SinglePostParams = {
   slug: string;
 };
 export async function SinglePost({ slug }: SinglePostParams) {
   const post = await findPublicPostBySlugCached(slug);
+
+  if (!post || !post.published) notFound();
 
   return (
     <article className="mb-16">
