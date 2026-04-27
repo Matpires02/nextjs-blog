@@ -11,12 +11,13 @@
     "seed": "npx tsx src/db/drizzle/seeds.ts"
   },
   "dependencies": {
+    "@libsql/client": "^0.17.3",
     "@uiw/react-md-editor": "^4.0.11",
     "bcryptjs": "^3.0.3",
-    "better-sqlite3": "^12.6.2",
+    "better-sqlite3": "^12.9.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
-    "drizzle-orm": "^0.45.1",
+    "drizzle-orm": "^0.45.2",
     "jose": "^6.2.2",
     "lucide-react": "^0.577.0",
     "next": "16.1.6",
