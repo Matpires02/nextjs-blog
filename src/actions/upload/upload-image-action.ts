@@ -1,16 +1,26 @@
 "use server";
 
-import {
-  IMAGE_SERVER_URL,
-  IMAGE_UPLOAD_DIRECTORY,
-  IMAGE_UPLOAD_MAX_SIZE,
-} from "@/lib/constants";
+import { verifyLoginSession } from "@/lib/login/manage-login";
 import { mkdir, writeFile } from "fs/promises";
 import { extname, resolve } from "path";
+
+const IMAGE_UPLOAD_MAX_SIZE =
+  Number(process.env.NEXT_PUBLIC_MAX_SIZE) || 921600;
+const IMAGE_UPLOAD_DIRECTORY = process.env.IMAGE_UPLOAD_DIRECTORY || "uploads";
+const IMAGE_SERVER_URL =
+  process.env.IMAGE_SERVER_URL || "http://localhost:3000/uploads";
 
 export async function uploadImageAction(
   formData: FormData,
 ): Promise<{ url: string; error?: string }> {
+  const isAuthenticated = await verifyLoginSession();
+  if (!isAuthenticated) {
+    return {
+      error: "Faça login em outra aba antes de salvar",
+      url: "",
+    };
+  }
+
   if (!(formData instanceof FormData)) {
     return { error: "Dados inválidos", url: "" };
   }

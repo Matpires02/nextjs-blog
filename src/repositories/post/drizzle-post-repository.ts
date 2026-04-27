@@ -2,10 +2,10 @@ import { PostModel } from "@/models/post/post-model";
 import { PostRepository } from "./post-repository";
 import { drizzleDb } from "@/db/drizzle";
 import { asyncDelay } from "@/utils/async-delay";
-import { SIMULATE_WAIT_IN_MS } from "@/lib/constants";
-
 import { postTable } from "@/db/drizzle/schemas";
 import { eq } from "drizzle-orm";
+
+const SIMULATE_WAIT_IN_MS = Number(process.env.SIMULATE_WAIT_IN_MS) || 0;
 
 export class DrizzlePostRepository implements PostRepository {
   async findAllPublic(): Promise<PostModel[]> {

@@ -3,13 +3,15 @@
 import { ImageUpIcon } from "lucide-react";
 import { Button } from "../Button";
 import { useRef, useState, useTransition } from "react";
-import { IMAGE_UPLOAD_MAX_SIZE } from "@/lib/constants";
 import { toast } from "react-toastify";
 import { uploadImageAction } from "@/actions/upload/upload-image-action";
 
 type ImageUploaderProps = {
   disabled?: boolean;
 };
+
+const IMAGE_UPLOAD_MAX_SIZE =
+  Number(process.env.NEXT_PUBLIC_MAX_SIZE) || 921600;
 
 export default function ImageUploader({ disabled }: ImageUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);

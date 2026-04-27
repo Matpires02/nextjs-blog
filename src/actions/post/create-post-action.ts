@@ -1,6 +1,7 @@
 "use server";
 
-import { PublicPost } from "@/dto/post/dto";
+import { makePartialPublicPost, PublicPost } from "@/dto/post/dto";
+import { verifyLoginSession } from "@/lib/login/manage-login";
 import { PostCreateSchema } from "@/lib/post/validations";
 import { PostModel } from "@/models/post/post-model";
 import { postRepository } from "@/repositories/post";
@@ -30,11 +31,19 @@ export async function createPostAction(
   const formdataObj = Object.fromEntries(formData.entries());
   const zodParsedObj = PostCreateSchema.safeParse(formdataObj);
 
+  const isAuthenticated = await verifyLoginSession();
+  if (!isAuthenticated) {
+    return {
+      errors: ["Faça login em outra aba antes de salvar"],
+      formState: makePartialPublicPost(prevState.formState),
+    };
+  }
+
   if (!zodParsedObj.success) {
     const errors = getZodErrorMessages(zodParsedObj.error.format());
     return {
       errors,
-      formState: prevState.formState,
+      formState: makePartialPublicPost(prevState.formState),
     };
   }
 
