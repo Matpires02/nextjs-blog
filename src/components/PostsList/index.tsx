@@ -22,7 +22,7 @@ export async function PostsList() {
               imageProps={{
                 width: 1200,
                 height: 720,
-                src: p.coverImageUrl,
+                src: p.coverImageUrl.replace("http://localhost:3000", ""),
                 alt: p.title,
               }}
             />

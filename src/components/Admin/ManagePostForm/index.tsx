@@ -8,6 +8,7 @@ import { InputCheckbox } from "@/components/InputCheckbox";
 import { InputText } from "@/components/InputText";
 import MarkdownEditor from "@/components/MarkdownEditor";
 import { makePartialPublicPost, PublicPost } from "@/dto/post/dto";
+import { AlertTriangleIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
@@ -16,10 +17,12 @@ import { toast } from "react-toastify";
 type ManagePostFormUpdateProps = {
   publicPost: PublicPost;
   mode: "update";
+  allowUploadImage: boolean;
 };
 
 type ManagePostFormCreateProps = {
   mode: "create";
+  allowUploadImage: boolean;
 };
 
 type ManagePostFormProps =
@@ -27,7 +30,7 @@ type ManagePostFormProps =
   | ManagePostFormUpdateProps;
 
 export default function ManagePostForm(props: ManagePostFormProps) {
-  const { mode } = props;
+  const { mode, allowUploadImage } = props;
   const searchParams = useSearchParams();
   const created = searchParams.get("created");
   const router = useRouter();
@@ -124,7 +127,31 @@ export default function ManagePostForm(props: ManagePostFormProps) {
           value={contentValue}
           disabled={isPending}
         />
-        <ImageUploader disabled={isPending} />
+        {!allowUploadImage && (
+          <>
+            <div className="rounded-md bg-[#f0b1001a] p-4 outline-1 outline-[#FFC45F]/15 text-[#fef9c2]">
+              <div className="flex align-middle">
+                <div className="shrink-0">
+                  <AlertTriangleIcon
+                    className="w-5 h-5"
+                    fill="#f0b000"
+                    color="black"
+                  />
+                </div>
+                <div className="ml-3">
+                  <h3 className="font-medium">Atenção:</h3>
+                  <div className="mt-2">
+                    <p className="text-sm">
+                      Upload de imagem está desablitado. Utilize links de
+                      imagens ou Data URL
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+        <ImageUploader disabled={isPending || !allowUploadImage} />
         <InputText
           labelText="Url da imagem de capa"
           name="coverImageUrl"

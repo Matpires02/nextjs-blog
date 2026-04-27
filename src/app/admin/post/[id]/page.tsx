@@ -17,6 +17,8 @@ export const metadata: Metadata = {
 export default async function AdminPostIdPage({
   params,
 }: AdminPostIdPageProps) {
+  const allowUploadImage = Boolean(Number(process.env.ALLOW_UPLOAD_IMAGE));
+
   const { id } = await params;
   const post = await findPostByIdAdmin(id);
 
@@ -27,7 +29,11 @@ export default async function AdminPostIdPage({
   return (
     <div className="flex flex-col gap-6">
       <h1 className="text-xl font-extrabold">Editar post</h1>
-      <ManagePostForm mode="update" publicPost={publicPost} />
+      <ManagePostForm
+        allowUploadImage={allowUploadImage}
+        mode="update"
+        publicPost={publicPost}
+      />
     </div>
   );
 }

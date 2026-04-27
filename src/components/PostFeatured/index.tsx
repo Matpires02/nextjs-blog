@@ -25,7 +25,7 @@ export async function PostFeatured() {
         imageProps={{
           width: 1200,
           height: 720,
-          src: post.coverImageUrl,
+          src: post.coverImageUrl.replace("http://localhost:3000", ""),
           alt: "Alt da imagem",
           priority: true,
         }}

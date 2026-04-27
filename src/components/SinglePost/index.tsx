@@ -17,7 +17,7 @@ export async function SinglePost({ slug }: SinglePostParams) {
     <article className="mb-16">
       <header className="group flex flex-col gap-4 mb-4">
         <Image
-          src={post.coverImageUrl}
+          src={post.coverImageUrl.replace("http://localhost:3000", "")}
           width={1200}
           height={720}
           alt={post.title}
