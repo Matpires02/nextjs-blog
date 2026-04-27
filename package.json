@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "migrate": "drizzle-kit migrate",
+    "seed": "npx tsx src/db/drizzle/seeds.ts"
   },
   "dependencies": {
     "@uiw/react-md-editor": "^4.0.11",

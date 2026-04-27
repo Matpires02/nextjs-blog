@@ -92,7 +92,3 @@ export async function verifyJwt(jwt: string | undefined = "") {
     return false;
   }
 }
-
-/* (async () => {
-  console.log(await hashPassword("1234"));
-})(); */

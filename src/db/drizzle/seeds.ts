@@ -9,7 +9,8 @@ import { postTable } from "./schemas";
   try {
     await drizzleDb.delete(postTable);
     await drizzleDb.insert(postTable).values(posts);
+    console.log(posts.length + " posts foram salvos na base de dados.");
   } catch (error) {
-    console.error(error);
+    console.error("Erro:", error);
   }
 })();
