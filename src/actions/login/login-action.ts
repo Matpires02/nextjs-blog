@@ -40,14 +40,14 @@ export async function loginAction(state: LoginActionState, formData: FormData) {
   }
 
   //TODO: ao usar db alterar
-  console.log(username, process.env.LOGIN_USER, process.env.LOGIN_PASS);
+  console.warn(username, process.env.LOGIN_USER, process.env.LOGIN_PASS);
   const isUsernameValid = username === process.env.LOGIN_USER;
   const isPasswordValid = await verifyPassword(
     password,
     process.env.LOGIN_PASS || "",
   );
 
-  console.log(isUsernameValid, isPasswordValid);
+  console.warn(isUsernameValid, isPasswordValid);
 
   if (!isUsernameValid || !isPasswordValid) {
     return {
