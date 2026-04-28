@@ -1,4 +1,5 @@
 import { drizzle as drizzleTurso } from "drizzle-orm/libsql";
+/*import { drizzle } from "drizzle-orm/better-sqlite3";*/
 import { postTable } from "./schemas";
 import { resolve } from "path";
 import { createClient } from "@libsql/client";
@@ -8,12 +9,13 @@ const sqliteDatabasePath = resolve(
   process.env.DATABASE_URL || "db.sqlite3",
 );
 
-/* export const drizzleDb = drizzle(sqliteDatabase, {
+/* export const drizzleDb = drizzle(sqliteDatabasePath, {
   schema: {
     posts: postTable,
   },
   logger: false,
-}); */
+});
+*/
 
 let db;
 
